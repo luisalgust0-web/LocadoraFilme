@@ -1,6 +1,6 @@
 <mat-form-field class="example-full-width">
   <mat-label>Titulo do Filme:</mat-label>
-  <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="filmAuto" (keyup)="GetFilmList($event)">
+  <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="filmAuto" (keyup)="GetFilmList($event)" [(ngModel)]="film">
   <mat-autocomplete #filmAuto="matAutocomplete" [displayWith]="filmName">
     <mat-option *ngFor="let film of films" [value]="film" (click)="selecionarFilm(film)">
       {{film.title}}
@@ -10,11 +10,11 @@
 
 <mat-form-field class="example-full-width">
   <mat-label>Nome do Cliente: </mat-label>
-  <input type="text" matInput placeholder="nome cliente" [matAutocomplete]="customerAuto" 
+  <input type="text" matInput placeholder="nome cliente" [matAutocomplete]="customerAuto"  [(ngModel)]="customer"
     (keyup)="GetCustomerList($event)">
-  <mat-autocomplete #customerAuto="matAutocomplete" [displayWith]="customerName">
+  <mat-autocomplete #customerAuto="matAutocomplete" [displayWith]="customerName" [requireSelection]="false">
     <mat-option *ngFor="let customer of customers" [value]="customer" (click)="selecionarCustomer(customer)">
-      {{customer.first_name! + customer.last_name!}}
+      {{customer.first_name! + ' ' +  customer.last_name!}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

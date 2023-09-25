@@ -5,6 +5,7 @@ import { Film } from 'src/app/locadoraFilme/film/models/Film';
 import { FilmService } from 'src/app/locadoraFilme/film/service/film.service';
 import { RentalService } from '../../service/rental.service';
 import { Rental } from '../../models/rental';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-consult-rental',
@@ -23,11 +24,15 @@ export class ConsultRentalComponent {
   public dataInicio: any;
   public dataFinal: any;
 
+  customer?:Customer | null = null;
+  film:Film | null = null;
+
 
   constructor(
     private filmService: FilmService,
     private customerService: ClienteService,
-    private service: RentalService
+    private service: RentalService,
+    private _snackBar: MatSnackBar
   ) { }
 
   public GetFilmList(event: any) {
@@ -43,11 +48,12 @@ export class ConsultRentalComponent {
   }
 
   public customerName(customer: Customer): string {
-    return customer.first_name! + customer.last_name!;
+    return customer.first_name! + ' ' + customer.last_name!;
   }
 
   public selecionarCustomer(customer: Customer) {
     this.customerId = customer.customer_id;
+    this.customers = [];
   }
 
   public filmName(film: Film): string {
@@ -56,11 +62,18 @@ export class ConsultRentalComponent {
 
   public selecionarFilm(film: Film) {
     this.filmId = film.film_id;
+    this.films = [];
   }
 
 
   public GetRental() {
-    this.service.GetRentals(this.customerId, this.filmId, this.dataInicio, this.dataFinal).subscribe((resp: Rental[]) => {
+
+    if(!this.customer){
+      this._snackBar.open("O cliente é borgitório", "Erro");
+      return;
+    }
+
+    this.service.GetRentals(this.customer?.customer_id, this.film?.film_id, this.dataInicio, this.dataFinal).subscribe((resp: Rental[]) => {
       this.rentals = resp;
     })
   }

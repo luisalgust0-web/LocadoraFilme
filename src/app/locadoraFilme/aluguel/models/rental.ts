@@ -13,7 +13,7 @@ export interface Rental {
     situacao : Situacao
 }
 
-enum Situacao{
+export enum Situacao{
     alugado = 1,
     devolvido = 2,
     pago = 3

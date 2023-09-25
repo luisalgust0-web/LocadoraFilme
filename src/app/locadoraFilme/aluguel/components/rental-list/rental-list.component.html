@@ -30,7 +30,9 @@
 
       <ng-container matColumnDef="situacao">
         <th mat-header-cell *matHeaderCellDef> Situação do aluguel: </th>
-        <td mat-cell *matCellDef="let rental"><button mat-raised-button color="primary" (click)="rotinaSituacao(rental.rental_id)">{{rental.situacao}}</button></td>
+        <td mat-cell *matCellDef="let rental">
+          <button mat-mini-fab extended [color]="getColorButtom(rental)" (click)="rotinaSituacao(rental.rental_id)" [disabled]="rental.situacao == Situacao.pago">{{getTextButtom(rental)}}</button>
+        </td>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

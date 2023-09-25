@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Rental } from '../../models/rental';
+import { Rental, Situacao } from '../../models/rental';
 import { ConsultRentalComponent } from '../consult-rental/consult-rental.component';
 import { RentalService } from '../../service/rental.service';
 import { S } from '@angular/cdk/keycodes';
@@ -41,5 +41,32 @@ export class RentalListComponent {
       default: break;
     }
     return;
+  }
+
+  getColorButtom(item:Rental):string{
+    switch(item.situacao){
+      case Situacao.alugado:
+        return "primary";
+      case Situacao.devolvido:
+        return "accent";
+      default:
+        return "secondary";
+    }
+    
+  }
+
+  getTextButtom(item:Rental):string{
+    switch(item.situacao){
+      case Situacao.alugado:
+        return "Devolver";
+      case Situacao.devolvido:
+        return "Pagar";
+      default:
+        return "Ok";
+    }
+  }
+
+  get Situacao(){
+    return Situacao;
   }
 }
