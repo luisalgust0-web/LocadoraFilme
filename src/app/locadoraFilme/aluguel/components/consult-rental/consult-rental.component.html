@@ -1,0 +1,35 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Titulo do Filme:</mat-label>
+  <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="filmAuto" (keyup)="GetFilmList($event)">
+  <mat-autocomplete #filmAuto="matAutocomplete" [displayWith]="filmName">
+    <mat-option *ngFor="let film of films" [value]="film" (click)="selecionarFilm(film)">
+      {{film.title}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Nome do Cliente: </mat-label>
+  <input type="text" matInput placeholder="nome cliente" [matAutocomplete]="customerAuto" 
+    (keyup)="GetCustomerList($event)">
+  <mat-autocomplete #customerAuto="matAutocomplete" [displayWith]="customerName">
+    <mat-option *ngFor="let customer of customers" [value]="customer" (click)="selecionarCustomer(customer)">
+      {{customer.first_name! + customer.last_name!}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Intervalo de aluguel do titulo</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+    <input matStartDate placeholder="Data Inicio" [(ngModel)]="dataInicio">
+    <input matEndDate placeholder="Data Final" [(ngModel)]="dataFinal">
+  </mat-date-range-input>
+  <mat-hint>Data de Incio – Data Final</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="GetRental()" class="button">Buscar Alugueis</button>
+
+<app-rental-list [rentals]="rentals"></app-rental-list>

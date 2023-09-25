@@ -1,0 +1,38 @@
+<table mat-table [dataSource]="rentals" class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="nomeCliente">
+      <th mat-header-cell *matHeaderCellDef> Nome do Cliente: </th>
+      <td mat-cell *matCellDef="let rental"> {{rental.customer_First_Name + rental.customer_Last_Name}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="titleFilm">
+      <th mat-header-cell *matHeaderCellDef> Titulo do Filme: </th>
+      <td mat-cell *matCellDef="let rental"> {{rental.inventory_Film_Title}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="rentalDate">
+      <th mat-header-cell *matHeaderCellDef> Data do Aluguel: </th>
+      <td mat-cell *matCellDef="let rental"> {{rental.rental_date}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="forecastDate">
+      <th mat-header-cell *matHeaderCellDef> Data Prevista Para Devolução: </th>
+      <td mat-cell *matCellDef="let rental"> {{rental.forecast_date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="returnDate">
+        <th mat-header-cell *matHeaderCellDef> Data da Devolução: </th>
+        <td mat-cell *matCellDef="let rental"> {{rental.return_date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="situacao">
+        <th mat-header-cell *matHeaderCellDef> Situação do aluguel: </th>
+        <td mat-cell *matCellDef="let rental"><button mat-raised-button color="primary" (click)="rotinaSituacao(rental.rental_id)">{{rental.situacao}}</button></td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
