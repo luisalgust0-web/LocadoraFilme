@@ -1,0 +1,51 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Categoria</mat-label>
+  <mat-select [(ngModel)]="categoryId">
+    <mat-option> -- </mat-option>
+    <mat-option *ngFor="let category of categorys" [value]="category.category_id">
+      {{category.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+  <mat-label>Idiomas</mat-label>
+  <mat-select [(ngModel)]="languageId">
+    <mat-option>--</mat-option>
+    <mat-option *ngFor="let language of languages" [value]="language.language_id">
+      {{language.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<ng-container [formGroup]="rentalForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Filme</mat-label>
+    <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="auto"
+      (keyup)="getFilmCategoryList($event)">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="filmName">
+      <mat-option *ngFor="let film of films_category" [value]="film" (click)="selecionar(film)">
+        {{film.filmTitle}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data do aluguel</mat-label>
+    <input matInput [matDatepicker]="picker1" placeholder="Start date" formControlName="rental_date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Data prevista para devolução</mat-label>
+    <input matInput [matDatepicker]="picker2" placeholder="End date" formControlName="forecast_date">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="voltar()" class="button"> voltar </button> <button
+    mat-raised-button color="primary" class="button" (click)="addRental()">novo aluguel</button>
+</ng-container>

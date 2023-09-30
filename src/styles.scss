@@ -1,18 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 .mat-mdc-snack-bar-container.LocadoraException {
-    --mdc-snackbar-container-color: #ff001436;
-    --mdc-snackbar-supporting-text-color: red;
+    --mdc-snackbar-container-color: #fd0015e0;
+    --mdc-snackbar-supporting-text-color: rgb(0, 0, 0);
     --mat-snack-bar-button-color: black;
 
 }
 .mat-mdc-snack-bar-container.Exception{
-    --mdc-snackbar-container-color: #ffff003b;
-    --mdc-snackbar-supporting-text-color: #ffc301;
+    --mdc-snackbar-container-color: #ec770a;
+    --mdc-snackbar-supporting-text-color: rgb(0, 0, 0);
     --mat-snack-bar-button-color: black;
 }
 
 .mat-mdc-snack-bar-container.Sucess{
-    background: #d4edda;
+    --mdc-snackbar-container-color: #06c432;
+    --mdc-snackbar-supporting-text-color: rgb(0, 0, 0);
+    --mat-snack-bar-button-color: black;
 }
 
 // .mat-mdc-snack-bar-container {

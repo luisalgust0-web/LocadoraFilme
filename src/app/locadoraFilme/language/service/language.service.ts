@@ -11,7 +11,7 @@ export class LanguageService {
 
   private urlAPI : string = environment.url+"Language/"
 
-  public GetLanguages() : any {
+  public getLanguages() : any {
     var url = this.urlAPI+"GetLista"
 
     return this.http.get<Language>(url);

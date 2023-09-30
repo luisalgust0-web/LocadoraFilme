@@ -3,7 +3,7 @@
   <input type="text" matInput placeholder="ex : Marcia" [(ngModel)]="name" (keyup)="getCustomerByName()" [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="customerName">
     <mat-option *ngFor="let customer of customers" [value]="customer">
-      {{customer.first_name! + customer.last_name!}}
+      {{customer.first_name! + " " +customer.last_name!}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

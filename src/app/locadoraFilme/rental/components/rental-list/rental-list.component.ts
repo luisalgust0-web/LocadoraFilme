@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Rental, Situacao } from '../../models/rental';
+import { Rental, TipoSituacao } from '../../models/rental';
 import { ConsultRentalComponent } from '../consult-rental/consult-rental.component';
 import { RentalService } from '../../service/rental.service';
 import { S } from '@angular/cdk/keycodes';
@@ -18,36 +18,19 @@ export class RentalListComponent {
 
   constructor(public service: RentalService, public route: Router) { }
 
-  public GetRental(rental_id: number): any {
+  public getRental(rental_id: number): any {
 
-    this.service.GetRentalsById(rental_id).subscribe((resp: Rental) => {
+    this.service.getRentalById(rental_id).subscribe((resp: Rental) => {
       this.rental = resp;
       this.rotinaSituacao(this.rental);
     });
   }
 
-  public rotinaSituacao(rental: Rental) {
-    switch (this.rental.situacao.toString()) {
-      case "alugado": {
-        this.rental.return_date = new Date();
-        this.rental.situacao = 2;
-        this.rental.last_update = new Date();
-        return this.service.UpdateRental(this.rental.rental_id, this.rental.rental_date, this.rental.inventory_id, this.rental.customer_id, this.rental.return_date!, this.rental.staff_id, this.rental.last_update, this.rental.forecast_date, this.rental.situacao).subscribe((resp: any) => {
-        });
-      }
-      case "devolvido": {
-        return this.route.navigate([`/locadoraFilmes/newPayment/${this.rental.rental_id}`]);
-      }
-      default: break;
-    }
-    return;
-  }
-
   getColorButtom(item:Rental):string{
     switch(item.situacao){
-      case Situacao.alugado:
+      case TipoSituacao.alugado:
         return "primary";
-      case Situacao.devolvido:
+      case TipoSituacao.devolvido:
         return "accent";
       default:
         return "secondary";
@@ -57,9 +40,9 @@ export class RentalListComponent {
 
   getTextButtom(item:Rental):string{
     switch(item.situacao){
-      case Situacao.alugado:
+      case TipoSituacao.alugado:
         return "Devolver";
-      case Situacao.devolvido:
+      case TipoSituacao.devolvido:
         return "Pagar";
       default:
         return "Ok";
@@ -67,6 +50,24 @@ export class RentalListComponent {
   }
 
   get Situacao(){
-    return Situacao;
+    return TipoSituacao;
+  }
+
+  public rotinaSituacao(rental: Rental) {
+    switch (rental.situacao) {
+      case TipoSituacao.alugado: {
+        rental.return_date = new Date();
+        rental.situacao = 2;
+        rental.last_update = new Date();
+        return this.service.updateRental(rental.rental_id, rental.rental_date, rental.inventory_id, rental.customer_id, rental.return_date!, rental.staff_id, rental.last_update, rental.forecast_date, rental.situacao).subscribe((resp: any) => {
+          
+        });
+      }
+      case TipoSituacao.devolvido: {
+        return this.route.navigate([`/locadoraFilmes/newPayment/${rental.rental_id}`]);
+      }
+      default: break;
+    }
+    return;
   }
 }

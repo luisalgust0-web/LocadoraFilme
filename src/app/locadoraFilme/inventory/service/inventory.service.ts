@@ -13,7 +13,7 @@ export class InventoryService {
   
   private urlAPI = environment.url+"Inventory/"
 
-  public GetInventoryByFilmId(id : number) : Observable<Inventory> {
+  public getInventoryByFilmId(id : number) : Observable<Inventory> {
       var url = `${this.urlAPI}GetInventoryByFilmId/${id}`
 
       return this.http.get<Inventory>(url);

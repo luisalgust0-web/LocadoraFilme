@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { publishFacade } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { Rental } from '../models/rental';
+import { Rental, TipoSituacao } from '../models/rental';
 import { DatePipe } from '@angular/common';
 import { createUrlTreeFromSnapshot } from '@angular/router';
 
@@ -14,12 +14,12 @@ export class RentalService {
   constructor(private http : HttpClient, private datePipe : DatePipe) { }
   urlAPI = environment.url + "Rental/";
 
-  public GetRentalsById(customer_id : number) : any{
+  public getRentalById(customer_id : number) : any{
     var url = this.urlAPI+`GetItem/${customer_id}`;
     return this.http.get(url);
   }
 
-  public GetRentals(customer_id: any, film_id: any, dataInicio: Date | null, dataFinal: Date | null) : any{
+  public getRentals(customer_id: any, film_id: any, dataInicio: Date | null, dataFinal: Date | null) : any{
 
     var url = this.urlAPI+`GetLista`;
     var params = '';
@@ -51,16 +51,16 @@ export class RentalService {
     return this.http.get<Rental[]>(url);
   }
 
-  public AddRental(rental_id : number,rental_date : Date,inventory_id : number,customer_id : number,staff_id : number,last_update : Date,forecast_date : Date, situacao : number) : any{
+  public addRental(rental : Rental) : any{
     var props = {
-      "Rental_id" : rental_id,
-      "Rental_date" : rental_date,
-      "Inventory_id" : inventory_id,
-      "Customer_id" : customer_id,
-      "Staff_id" : staff_id,
-      "Last_update" : last_update, 
-      "Forecast_date": forecast_date,
-      "Situacao" : situacao
+      "Rental_id" : rental.rental_id,
+      "Rental_date" : rental.rental_date,
+      "Inventory_id" : rental.inventory_id,
+      "Customer_id" : rental.customer_id,
+      "Staff_id" : rental.staff_id,
+      "Last_update" : rental.last_update, 
+      "Forecast_date": rental.forecast_date,
+      "Situacao" : rental.situacao
     }
 
     var url = this.urlAPI+"AddItem";
@@ -68,7 +68,7 @@ export class RentalService {
     return this.http.post(url,props);
   }
 
-  public UpdateRental(rental_id : number, rental_date : Date, inventory_id : number, customer_id : number, return_date : Date | null, staff_id : number, last_update : Date, forecast_date : Date, situacao : number
+  public updateRental(rental_id : number, rental_date : Date, inventory_id : number, customer_id : number, return_date : Date | null, staff_id : number, last_update : Date, forecast_date : Date, situacao : number
   ){
     var props = {
       "Rental_id" : rental_id,

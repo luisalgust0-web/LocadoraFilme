@@ -1,1 +1,29 @@
-<p>new-payment works!</p>
+<mat-form-field class="example-full-width">
+    <mat-label>Cliente :</mat-label>
+    <input type="text" matInput placeholder="Nome do cliente" [(ngModel)]="customerName" >
+  </mat-form-field>
+  
+  <mat-form-field class="example-full-width">
+    <mat-label>Film :</mat-label>
+    <input matInput type="text" placeholder="Titulo do filme" [(ngModel)]="filmTitle">
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Data de retorno :</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="dataRetorno">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="always">
+    <mat-label>Valor a pagar :</mat-label>
+    <input matInput type="number" class="example-right-align" placeholder="0" [(ngModel)]="valorAluguel">
+    <span matTextPrefix>$&nbsp;</span>
+    <span matTextSuffix>.00</span>
+    <mat-label>Valor : </mat-label>
+  </mat-form-field>
+
+
+  
+  <button mat-raised-button color="primary" (click)="voltar()" class="button-voltar"> voltar </button> <button mat-raised-button color="primary" class="button" (click)="addPayment()">Efetuar pagamento</button>

@@ -11,7 +11,7 @@ export class CategoryService {
 
   private urlAPI : string = environment.url+"Category/";
 
-  public GetCategorys() : any {
+  public getCategorys() : any {
     var url : string = this.urlAPI + "GetLista"
 
     return this.http.get<Category>(url);

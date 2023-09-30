@@ -11,7 +11,6 @@ import {  Router } from '@angular/router';
 })
 export class HomeComponent {
   constructor (
-    private fb : FormBuilder,
     private service : ClienteService,
     private route : Router
     ) {} 
@@ -20,7 +19,7 @@ export class HomeComponent {
   public name! : any
 
   public getCustomerByName(){
-    this.service.GetCustomerByName(this.name).subscribe((resp : Customer[] ) =>{
+    this.service.getCustomersByName(this.name).subscribe((resp : Customer[] ) =>{
       this.customers = resp
     })
   }
@@ -31,6 +30,6 @@ export class HomeComponent {
   }
 
   customerName (customer : Customer ): string{
-    return customer && customer.first_name ? customer.first_name : "";
+    return customer && customer.first_name ? `${customer.first_name!} ${customer.last_name!}`  : "";
   }
 }

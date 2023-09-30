@@ -30,9 +30,9 @@ export class ErroInterceptorInterceptor implements HttpInterceptor {
       tap((evt:any) => {
         if (evt instanceof HttpResponse) {
 
-          if(evt.body && evt.body.message){
-            this._snackBar.open(evt.body.message, 'close', {
-              panelClass : [evt.body.typeExcpetion]
+          if(evt.body && evt.body._message){
+            this._snackBar.open(evt.body._message, 'close', {
+              panelClass : [evt.body._type]
             });
 
           }

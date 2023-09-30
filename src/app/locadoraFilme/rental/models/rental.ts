@@ -10,10 +10,11 @@ export interface Rental {
     staff_id : number
     last_update : Date
     forecast_date : Date
-    situacao : Situacao
+    descricaoSituacao?: string
+    situacao : TipoSituacao
 }
 
-export enum Situacao{
+export enum TipoSituacao{
     alugado = 1,
     devolvido = 2,
     pago = 3

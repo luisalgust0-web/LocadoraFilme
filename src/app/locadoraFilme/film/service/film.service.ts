@@ -12,19 +12,19 @@ export class FilmService {
 
   private urlAPI : string = environment.url+"Film/"
 
-  public GetFilms() : any {
+  public getFilms() : any {
     var url : string = this.urlAPI+"GetLista"
 
     return this.http.get<Film>(url);
   }
  
-  public GetFilmsByTitle(title : string) : any {
+  public getFilmsByTitle(title : string) : any {
     var url : string = `${this.urlAPI}GetListaByTitle?title=${title}`
 
     return this.http.get<Film>(url);
   }
 
-  public GetFilmsById(id : number) : any {
+  public getFilmsById(id : number) : any {
     var url = `${this.urlAPI}GetItem/${id}`
 
     return this.http.get<Film>(url)

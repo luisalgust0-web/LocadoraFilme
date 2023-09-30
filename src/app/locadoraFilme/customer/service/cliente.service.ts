@@ -10,15 +10,15 @@ import { Observable } from 'rxjs';
 export class ClienteService {
   constructor(private http : HttpClient) { }
 
-  private urlAPI = environment.url+"Customer/"
+  private urlAPI = environment.url+"Customer/";
 
-  public GetCustomerByName(name : string) : any{
+  public getCustomersByName(name : string) : any{
 
-    var url : string = this.urlAPI+`GetCustomerByName?name=${name}`; 
+    var url : string = this.urlAPI+`GetCustomersByName?name=${name}`; 
     return this.http.get<Customer>(url);
   }
 
-  public GetCustomerById(id : number) : any{
+  public getCustomerById(id : number) : any{
     var url : string = `${this.urlAPI}GetItemById/${id}`
 
     return this.http.get<Customer>(url);

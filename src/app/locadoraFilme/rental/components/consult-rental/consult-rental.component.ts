@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
-import { Customer } from 'src/app/locadoraFilme/cliente/models/customer';
-import { ClienteService } from 'src/app/locadoraFilme/cliente/service/cliente.service';
+import { Customer } from 'src/app/locadoraFilme/customer/models/customer';
+import { ClienteService } from 'src/app/locadoraFilme/customer/service/cliente.service';
 import { Film } from 'src/app/locadoraFilme/film/models/Film';
 import { FilmService } from 'src/app/locadoraFilme/film/service/film.service';
 import { RentalService } from '../../service/rental.service';
@@ -35,14 +35,14 @@ export class ConsultRentalComponent {
     private _snackBar: MatSnackBar
   ) { }
 
-  public GetFilmList(event: any) {
-    this.filmService.GetFilmsByTitle(event.target.value).subscribe((resp: Film[]) => {
+  public getFilmList(event: any) {
+    this.filmService.getFilmsByTitle(event.target.value).subscribe((resp: Film[]) => {
       this.films = resp;
     })
   }
 
-  public GetCustomerList(event: any) {
-    this.customerService.GetCustomerByName(event.target.value).subscribe((resp: Customer[]) => {
+  public getCustomerList(event: any) {
+    this.customerService.getCustomersByName(event.target.value).subscribe((resp: Customer[]) => {
       this.customers = resp;
     })
   }
@@ -53,7 +53,7 @@ export class ConsultRentalComponent {
 
   public selecionarCustomer(customer: Customer) {
     this.customerId = customer.customer_id;
-    this.customers = [];
+    // this.customers = [];
   }
 
   public filmName(film: Film): string {
@@ -66,15 +66,15 @@ export class ConsultRentalComponent {
   }
 
 
-  public GetRental() {
+  public getRental() {
 
     if(!this.customer){
-      this._snackBar.open("O cliente é borgitório", "Erro");
+      this._snackBar.open("O cliente é obrgitório", "LocadoraException");
       return;
     }
 
-    this.service.GetRentals(this.customer?.customer_id, this.film?.film_id, this.dataInicio, this.dataFinal).subscribe((resp: Rental[]) => {
+    this.service.getRentals(this.customer?.customer_id, this.film?.film_id, this.dataInicio, this.dataFinal).subscribe((resp: Rental[]) => {
       this.rentals = resp;
-    })
+    });
   }
 }

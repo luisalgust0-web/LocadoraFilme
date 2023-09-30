@@ -31,7 +31,7 @@
       <ng-container matColumnDef="situacao">
         <th mat-header-cell *matHeaderCellDef> Situação do aluguel: </th>
         <td mat-cell *matCellDef="let rental">
-          <button mat-mini-fab extended [color]="getColorButtom(rental)" (click)="rotinaSituacao(rental.rental_id)" [disabled]="rental.situacao == Situacao.pago">{{getTextButtom(rental)}}</button>
+          <button mat-mini-fab extended [color]="getColorButtom(rental)" (click)="rotinaSituacao(rental)" [disabled]="rental.situacao == Situacao.pago">{{getTextButtom(rental)}}</button>
         </td>
       </ng-container>
   

@@ -12,7 +12,7 @@ export class FilmCategoryService {
 
   private urlAPI = environment.url+"Film_category/"
 
-  public getFilm_category(filmeTitle: string, categoryId: number | null, languageId: number | null) : any{
+  public getFilm_categorys(filmeTitle: string, categoryId: number | null, languageId: number | null) : any{
     var url = this.urlAPI+`GetListaFilmCategorys?title=${filmeTitle}`;
 
     if(categoryId){

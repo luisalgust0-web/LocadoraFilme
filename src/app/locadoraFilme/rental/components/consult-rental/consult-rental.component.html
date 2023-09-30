@@ -1,6 +1,6 @@
 <mat-form-field class="example-full-width">
   <mat-label>Titulo do Filme:</mat-label>
-  <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="filmAuto" (keyup)="GetFilmList($event)" [(ngModel)]="film">
+  <input type="text" matInput placeholder="titulo do filme" [matAutocomplete]="filmAuto" (keyup)="getFilmList($event)" [(ngModel)]="film">
   <mat-autocomplete #filmAuto="matAutocomplete" [displayWith]="filmName">
     <mat-option *ngFor="let film of films" [value]="film" (click)="selecionarFilm(film)">
       {{film.title}}
@@ -11,7 +11,7 @@
 <mat-form-field class="example-full-width">
   <mat-label>Nome do Cliente: </mat-label>
   <input type="text" matInput placeholder="nome cliente" [matAutocomplete]="customerAuto"  [(ngModel)]="customer"
-    (keyup)="GetCustomerList($event)">
+    (keyup)="getCustomerList($event)">
   <mat-autocomplete #customerAuto="matAutocomplete" [displayWith]="customerName" [requireSelection]="false">
     <mat-option *ngFor="let customer of customers" [value]="customer" (click)="selecionarCustomer(customer)">
       {{customer.first_name! + ' ' +  customer.last_name!}}
@@ -30,6 +30,6 @@
   <mat-date-range-picker #picker></mat-date-range-picker>
 </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="GetRental()" class="button">Buscar Alugueis</button>
+<button mat-raised-button color="primary" (click)="getRental()" class="button">Buscar Alugueis</button>
 
 <app-rental-list [rentals]="rentals"></app-rental-list>
