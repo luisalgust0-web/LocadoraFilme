@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'newRental/:customerId', component : NewRentalComponent},
   {path: 'consultRental', component : ConsultRentalComponent},
   {path: 'newPayment/:rentalId', component : NewPaymentComponent},
-  {path: 'confirmartionNewRental', component: ConfirmationNewRentalComponent}
+  {path: 'confirmartionNewRental/:rentalId', component: ConfirmationNewRentalComponent}
 ];
 
 @NgModule({

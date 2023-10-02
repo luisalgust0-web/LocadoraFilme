@@ -9,7 +9,6 @@ import { Inventory } from 'src/app/locadoraFilme/inventory/models/inventory';
 import { film_category } from 'src/app/locadoraFilme/filmCategory/models/film_category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from 'src/app/locadoraFilme/inventory/service/inventory.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FilmCategoryService } from 'src/app/locadoraFilme/filmCategory/service/film-category.service';
 import { Rental } from '../../models/rental';
 
@@ -43,7 +42,6 @@ export class NewRentalComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private route: Router,
-    private _snackBar: MatSnackBar
   ) { }
 
   public rentalForm: FormGroup = this.fb.group({
@@ -90,11 +88,8 @@ export class NewRentalComponent implements OnInit {
   public addRental() {
     var inputRental : Rental = this.rentalForm.getRawValue();
     this.rentalServie.addRental(inputRental).subscribe((res: any) => {
-      console.log(res)
-      this.route.navigate(["/locadoraFilmes/confirmationNewRental"])
-      this._snackBar.open("Operação realizada com sucesso", 'close', {
-        panelClass: ["Sucess"]
-      });
+      var rental : Rental = res;
+      this.route.navigate([`/locadoraFilmes/confirmartionNewRental/${rental.rental_id}`])
     })
   }
 
